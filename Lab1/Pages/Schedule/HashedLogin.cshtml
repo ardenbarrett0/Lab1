@@ -1,0 +1,59 @@
+﻿@page
+@model Lab1.Pages.Schedule.HashedLoginModel
+@{
+}
+
+<a id="myLink" href="http://localhost:5219/Schedule/StudentAccount" style="display:none;"></a>
+<button type="button" class="btn btn-primary position-relative" onclick="document.getElementById('myLink').click()">
+    Account
+    <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+        <span class="visually-hidden">New alerts</span>
+    </span>
+</button>
+
+
+<div class="text-center mb-5">
+    <h1>Welcome to the Login Page</h1>
+    <p>Please enter your credentials to log in.</p>
+</div>
+
+<form asp-page="HashedLogin">
+    <input asp-for="Username" class="form-control" placeholder="Enter Username" />
+    <br />
+    <label>Enter Password:</label>
+    <input asp-for="Password" class="form-control" placeholder="Enter Password"  />
+    <br />
+    <label>Select User Type:</label>
+    <select asp-for="PersonType" class="form-control">
+        <option value="Faculty">Faculty</option>
+        <option value="Student">Student</option>
+    </select>
+    <input type="submit" class="btn btn-primary" />
+    <button asp-page="HashedLogin" asp-page-handler="PopulateHandler" formnovalidate>Populate</button>
+   
+</form>
+
+(USE: Username: "JWall" Password: "JWall" for a faculty)
+(USE: Username: "pruta" Password: "pruta" for a student)
+
+@*Coding for the clear button*@
+<script>
+    function resetForm() {
+        document.getElementById("login-form").reset();
+    }
+</script>
+
+
+<br />
+@{
+    if (HttpContext.Session.GetString("username") != null)
+    {
+        <p class="text-success">@ViewData["LoginMessage"]</p>
+    }
+    else
+    {
+        <p class="text-danger">@ViewData["LoginMessage"]</p>
+    }
+}
+
+

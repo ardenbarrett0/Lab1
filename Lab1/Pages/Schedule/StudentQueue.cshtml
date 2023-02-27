@@ -1,0 +1,44 @@
+﻿@page
+@model Lab1.Pages.Schedule.StudentQueueModel
+@{
+    ViewData["Title"] = "Student Listing";
+}
+@{
+    //Testing that the user is logged in
+ if (HttpContext.Session.GetString("username") != null)
+    {
+
+    <div class="text-center">
+        <h1 style="color:mediumblue;" class="display-4">Current List of Students</h1>
+    </div>
+
+    //Used to create the table to view the data 
+    <table class="table table-bordered table-responsive table-hover">
+        <thead>
+            <tr>
+                <th>Student ID:</th>
+                <th>Student First Name:</th>
+                <th>Student Last Name:</th>
+                <th>Student Email:</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @{
+            foreach (var stu in Model.Queue)
+            {
+                            <tr>
+                                <td>@stu.StudentID</td>
+                                <td>@stu.FirstName</td>
+                                <td>@stu.LastName</td>
+                                <td>@stu.StuEmail</td>
+                                
+                            </tr>
+            }
+            }
+        
+        </tbody>
+    </table>
+
+    }
+    }

@@ -1,0 +1,55 @@
+﻿@page
+@using System.Data.SqlClient
+@using Lab1.Pages.DB
+@model Lab1.Pages.Schedule.SummaryPageModel
+@{
+}
+@{
+    //Used to make sure the user is logged in
+    if (HttpContext.Session.GetString("username") != null)
+    {
+
+
+
+    <h2 style="color:cornflowerblue" class="h2">Summary of Upcoming Office Hours to attend:</h2>
+    <h2 class="h2">Student:Arden Barrett</h2>
+
+    //displaying the table of the students upcoming office hours
+    <table class="table table-bordered table-responsive table progress-bar-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Office Number:</th>>
+                <th>Date:</th>
+                <th>Time:</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                //Query to select the right data from sql
+
+            string sqlQuery = "SELECT Meeting.office#, Meeting.dateID, Meeting.timeID FROM Meeting INNER JOIN Student ON Meeting.studentID = 3 ";
+
+            SqlDataReader QueryResults = DBClass.GeneralReaderQuery(sqlQuery);
+
+            while (QueryResults.Read())
+            {
+                        <tr>
+                            <td>@QueryResults["office#"]</td>
+                            <td>@QueryResults["dateID"]</td>
+                            <td>@QueryResults["timeID"]</td>
+                           
+
+
+                        </tr>
+            }
+            DBClass.Lab3DBConnection.Close();
+            }
+
+
+        </tbody>
+
+    </table>
+
+}
+}
